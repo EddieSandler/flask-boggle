@@ -17,6 +17,7 @@ def start_bogle():
     board=game.make_board()
     session['key']=board
     msg=flash('Play Boggle')
+
     return render_template('board.html',game=game,board=board,messages=msg)
 
 

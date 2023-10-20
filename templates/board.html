@@ -22,13 +22,13 @@
 </form>
 
 
-{% for line in board %}
-
-<p class="game_board"><h1>{{line}}</h1></p>
-
-{% endfor%}
-
-
+  {% for sub_list in board %}
+      <h1>
+          {% for item in sub_list %}
+              {{ item|replace(' ', '')|replace('"', '')|join(', ') }}
+          {% endfor %}
+      </h1>
+  {% endfor %}
 
 
 {%endblock%}

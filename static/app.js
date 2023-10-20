@@ -6,8 +6,8 @@ $(document).ready(function() {
     event.preventDefault(); // Prevent the default form submission
 
     const $guess = $('#guess').val(); // Get the value entered in the input field
-
-    console.log('Your guess is', $guess);
+    const word=$guess.toUpperCase()
+    console.log('Your guess is', word);
 
     // You can now use the $guess variable as needed
   });
