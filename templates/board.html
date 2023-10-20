@@ -1,12 +1,30 @@
 {% extends 'base.html' %}
 
-{% block title %} {% endblock %}
+{% block title %}
+
+{% endblock %}
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+
+    {% for message in messages %}
+      <h1>{{ message }}!</h1>
+    {% endfor %}
+
+  {% endif %}
+{% endwith %}
+
+<form action="/handle_guess" method="get" name="word">
+
+<input type="text" placeholder="enter a word">
+<button>submit</button>
+</form>
+
 
 {% for line in board %}
 
-<p class="gane_board"><h1>{{line}}</h1></p>
+<p class="game_board"><h1>{{line}}</h1></p>
 
 {% endfor%}
 
