@@ -1,16 +1,18 @@
-$(document).ready(function() {
-  // Wait for the document to be ready
 
-  $('#input-Word').submit(function(event) {
-    // Attach a submit event listener to the form
-    event.preventDefault(); // Prevent the default form submission
 
-    const $guess = $('#guess').val(); // Get the value entered in the input field
-    const word=$guess.toUpperCase()
-    console.log('Your guess is', word);
+async function playBoggle(e) {
+  e.preventDefault();
 
-    // You can now use the $guess variable as needed
-  });
-});
+  const wordInput = document.getElementById("guess");
+  const word = wordInput.value;
+  console.log('Word is:', word);
 
-// axios.get(`http://127.0.0.1:5000')
+   const response=await axios.post("/get_input/", { word: word })
+   console.log(response.config.data)
+
+   return response
+}
+
+const form = document.getElementById('input-Word');
+form.addEventListener('submit', playBoggle);
+
