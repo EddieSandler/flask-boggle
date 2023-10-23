@@ -5,15 +5,18 @@ let timeLeft = 60; // Initial time in seconds
 // Function to update the timer
 function updateTimer() {
   if (timeLeft > 0) {
-    // console.log(`Time left: ${timeLeft} seconds`);
+    document.getElementById('timer').textContent = timeLeft;
+    console.log(`Time left: ${timeLeft} seconds`);
     timeLeft--;
   } else {
     console.log('Time is up!');
+    document.getElementById('timer').textContent = '0';
     // You can add game-over logic here
     clearInterval(timerInterval); // Stop the timer
 
     const wordInput = document.getElementById("guess");
-    wordInput.disabled = true; // Disable the input field
+    document.getElementById('guess').disabled = true
+    // wordInput.disabled = true; // Disable the input field
   }
 }
 
@@ -26,8 +29,10 @@ async function playBoggle(e) {
 
 
   const wordInput = document.getElementById("guess");
+  const wordElement = document.getElementById("word");
   const word = wordInput.value;
   console.log('Word is:', word);
+  wordElement.textContent = word;
 
 
   const response = await axios.post("/get_input/", { word: word });
@@ -42,6 +47,7 @@ async function playBoggle(e) {
     console.log('good word')
     used_words.push(word)
     score += word.length
+    document.getElementById('score').textContent = score;
     console.log(used_words)
     console.log('score',score)
   }
