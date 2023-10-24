@@ -39,9 +39,12 @@ async function playBoggle(e) {
 
   const is_valid = response.data.is_valid;
   console.log('status:', is_valid);
+  document.getElementById('message').textContent = is_valid;
+
 
   if(used_words.includes(word)){
     console.log('try again asshole- you already used that')
+    document.getElementById('message').textContent = 'already used';
   }
   if(is_valid==='ok' && !used_words.includes(word)){
     console.log('good word')
