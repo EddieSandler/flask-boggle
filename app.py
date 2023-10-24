@@ -26,6 +26,8 @@ def start_bogle():
 
 @app.route('/get_input/', methods=['POST'])
 def get_input():
+    ''' retrieves user input and checks word against  list of valid words'''
+
     guess = request.json.get("word")
     session['guess'] = guess
     print(f'{guess} sent to the backend')
