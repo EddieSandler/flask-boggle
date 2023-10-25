@@ -48,6 +48,7 @@ def get_input():
 
 @app.route("/save_score/",methods=['POST'])
 def save_score():
+    ''' retrieves score from front end and updates scores and number of games played in session'''
     score=request.json.get('score')
     session['score']=score
     if 'play_count' in session:
@@ -60,6 +61,12 @@ def save_score():
     
    
     print('games played : ',session['play_count'])
+    print(session['score'])
 
-    return jsonify({'play_count': session['play_count']})
+    return jsonify({'play_count': session['play_count'],'score':session['score']})
+
+@app.route('/get_all_scores', methods=['GET'])
+def get_all_scores():
+    scores = session.get('score', [])
+    return jsonify({'scores': scores})
 
