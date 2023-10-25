@@ -2,8 +2,10 @@ const used_words = [];
 let score = 0;
 let timeLeft = 60; // Initial time in seconds
 
+
 // Function to update the timer
 function updateTimer() {
+  
   if (timeLeft > 0) {
     document.getElementById('timer').textContent = timeLeft;
     console.log(`Time left: ${timeLeft} seconds`);
@@ -11,7 +13,11 @@ function updateTimer() {
   } else {
     console.log('Time is up!');
     document.getElementById('timer').textContent = '0';
+   
     // You can add game-over logic here
+    console.log(score)
+
+    saveScore(score)
     clearInterval(timerInterval); // Stop the timer
 
     const wordInput = document.getElementById("guess");
@@ -27,7 +33,7 @@ const timerInterval = setInterval(updateTimer, 1000); // Update every second
 async function playBoggle(e) {
   e.preventDefault();
 
-
+ 
   const wordInput = document.getElementById("guess");
   const wordElement = document.getElementById("word");
   const word = wordInput.value;
@@ -44,9 +50,10 @@ async function playBoggle(e) {
 
   if(used_words.includes(word)){
     console.log('try again asshole- you already used that')
-    document.getElementById('message').textContent = 'already used';
+    document.getElementById('message').textContent = 'Word already used';
   }
   if(is_valid==='ok' && !used_words.includes(word)){
+    document.getElementById('message').textContent = 'Good Word!';
     console.log('good word')
     used_words.push(word)
     score += word.length
@@ -57,6 +64,10 @@ async function playBoggle(e) {
 
   wordInput.value = '';
   return response;
+}
+async function saveScore(score){
+  const savedScore=await axios.post("/save_score/", { score: score });
+
 }
 
 const form = document.getElementById('input-Word');

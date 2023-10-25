@@ -8,6 +8,11 @@ app.static_folder = 'static'
 game = Boggle()
 
 
+def initialize_session():
+    session['play_count'] = 0
+
+
+
 @app.route('/')
 def start_game():
 
@@ -40,4 +45,21 @@ def get_input():
         print( f'word is invalid status: {is_valid}')
     return jsonify(is_valid=is_valid)
 
+
+@app.route("/save_score/",methods=['POST'])
+def save_score():
+    score=request.json.get('score')
+    session['score']=score
+    if 'play_count' in session:
+        session['play_count'] += 1
+    else:
+        session['play_count'] = 1
+ 
+    print(f'score is : {score}')
+    
+    
+   
+    print('games played : ',session['play_count'])
+
+    return jsonify({'play_count': session['play_count']})
 
