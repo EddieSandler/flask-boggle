@@ -67,6 +67,9 @@ async function playBoggle(e) {
 }
 async function saveScore(score){
   const savedScore=await axios.post("/save_score/", { score: score });
+  const numGames= savedScore.data.play_count
+  console.log(numGames.play_count)
+  document.getElementById('numGames').textContent = numGames;
 
 }
 
