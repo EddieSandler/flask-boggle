@@ -15,7 +15,7 @@ function updateTimer() {
     document.getElementById('timer').textContent = '0';
 
 
-    saveScore(score)
+  
     clearInterval(timerInterval); // Stop the timer
 
     const wordInput = document.getElementById("guess");
