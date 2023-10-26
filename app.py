@@ -1,5 +1,5 @@
 from boggle import Boggle
-from flask import Flask, render_template, flash, session, request, redirect,jsonify
+from flask import Flask, render_template, flash, session, request,jsonify
 
 
 app = Flask(__name__)
@@ -39,10 +39,6 @@ def get_input():
     board = session['key']
     is_valid = game.check_valid_word(board, guess)
 
-    if is_valid == 'ok':
-        print(f'word is valid status: {is_valid}')
-    else:
-        print( f'word is invalid status: {is_valid}')
     return jsonify(is_valid=is_valid)
 
 
@@ -55,11 +51,11 @@ def save_score():
         session['play_count'] += 1
     else:
         session['play_count'] = 1
- 
+
     print(f'score is : {score}')
-    
-    
-   
+
+
+
     print('games played : ',session['play_count'])
     print(session['score'])
 
